@@ -1,1 +1,21 @@
+PDX - ORD 26 
+ORD - ROC 15
+ROC - DCA 10
+ROC - ATL 22
+ROC - MCO 24
+DCA - LAX 36
+DCA - SFO 25
+SFO - ORD 37
 
+
+Create a class, RouteNetwork, and add a main method that makes a graph to represent the network of airports shown in the image above.
+
+a. Each airport is a vertex. The airport code is a string, e.g. "ROC".
+
+b. The weight of each edge is an amount in tens of dollars, e.g. 15 = $150.
+
+3. Implement Dijkstra’s Algorithm as described in class. Modify the main method in your RouteNetwork class to:
+
+a. Prompt the user to enter two airport codes, e.g. DCA and ORD
+
+b. Print the lowest cost path between the two airports as determined by Dijkstra’s Algorithm, e.g. "DCA ROC ORD, 250 dollars."
