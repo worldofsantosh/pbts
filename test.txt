@@ -6,7 +6,7 @@ ROC - MCO 24
 DCA - LAX 36
 DCA - SFO 25
 SFO - ORD 37
-
+LAX - SFO 10
 
 Create a class, RouteNetwork, and add a main method that makes a graph to represent the network of airports shown in the image above.
 
