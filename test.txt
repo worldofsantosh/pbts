@@ -33,6 +33,72 @@ public class Hand implements Iterable<PlayingCard> {
     }
 }
 
+3.
+import java.util.*;
+import practicum.PlayingCard;
+import practicum.PlayingCard.Rank;
+import practicum.PlayingCard.Suit;
+
+public class CardOrganizer {
+
+    public Map<Suit, List<PlayingCard>> cardsBySuit(Deck deck) {
+        Map<Suit, List<PlayingCard>> suitMap = new HashMap<>();
+        for (PlayingCard card : deck) {
+            suitMap.computeIfAbsent(card.getSuit(), k -> new ArrayList<>()).add(card);
+        }
+        return suitMap;
+    }
+
+    public Map<Rank, List<PlayingCard>> cardsByRank(Deck deck) {
+        Map<Rank, List<PlayingCard>> rankMap = new HashMap<>();
+        for (PlayingCard card : deck) {
+            rankMap.computeIfAbsent(card.getRank(), k -> new ArrayList<>()).add(card);
+        }
+        return rankMap;
+    }
+}
+
+
+4.import java.util.*;
+import practicum.PlayingCard;
+import practicum.PlayingCard.Rank;
+import practicum.PlayingCard.Suit;
+
+public class Deck implements Iterable<PlayingCard> {
+    private List<PlayingCard> cards;
+
+    public Deck() {
+        cards = new ArrayList<>();
+        shuffle();
+    }
+
+    public void shuffle() {
+        cards.clear();
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                cards.add(new PlayingCard(rank, suit));
+            }
+        }
+        Collections.shuffle(cards);
+    }
+
+    public PlayingCard draw() {
+        if (cards.isEmpty()) {
+            throw new NoSuchElementException("No cards left in the deck");
+        }
+        return cards.remove(cards.size() - 1); // O(1) time
+    }
+
+    public int remaining() {
+        return cards.size();
+    }
+
+    @Override
+    public Iterator<PlayingCard> iterator() {
+        return cards.iterator();
+    }
+}
+
 
 
 
