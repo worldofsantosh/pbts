@@ -99,6 +99,94 @@ public class Deck implements Iterable<PlayingCard> {
     }
 }
 
+5.
+1. Modifying PlayingCard Class for Natural Ordering:
+public class PlayingCard implements Comparable<PlayingCard> {
+    private Suit suit;
+    private Rank rank;
+
+    // Constructor to initialize a card with a suit and a rank
+    public PlayingCard(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+    // Getters for suit and rank
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    // Implement the compareTo method to define natural ordering
+    @Override
+    public int compareTo(PlayingCard other) {
+        // First compare by suit
+        int suitComparison = this.suit.compareTo(other.suit);
+        if (suitComparison != 0) {
+            return suitComparison;
+        }
+        // If suits are the same, compare by rank
+        return this.rank.compareTo(other.rank);
+    }
+
+    // Equals and hashCode methods (important for HashSet/HashMap usage)
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        PlayingCard that = (PlayingCard) obj;
+        return suit == that.suit && rank == that.rank;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(suit, rank);
+    }
+
+    // Override toString for easy printing (optional)
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
+}
+
+2.Adding sort() Method to the Deck Class:
+import java.util.*;
+
+public class Deck implements Iterable<PlayingCard> {
+    private List<PlayingCard> cards;
+
+    // Constructor to create a new Deck
+    public Deck() {
+        cards = new ArrayList<>();
+        shuffle();  // Shuffle the deck initially to fill it with cards
+    }
+
+    // Shuffle method to fill the deck with 52 cards and randomize the order
+    public void shuffle() {
+        cards.clear();
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                cards.add(new PlayingCard(suit, rank));
+            }
+        }
+        Collections.shuffle(cards);
+    }
+
+    // Sort method to sort the cards in the deck based on the natural ordering defined in PlayingCard
+    public void sort() {
+        Collections.sort(cards);
+    }
+
+    // Iterator implementation to iterate over the cards in the deck
+    @Override
+    public Iterator<PlayingCard> iterator() {
+        return cards.iterator();
+    }
+}
 
 
 
