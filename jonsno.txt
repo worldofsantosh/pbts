@@ -2,65 +2,6 @@
                     Q U E S T I O N - 1
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
-PlayingCard.java •••
-package practicum;
-
-import java.util.*;
-
-
-public class PlayingCard implements Comparable<PlayingCard> 
-{
-    private Suit suit;
-    private Rank rank;
-
-    public PlayingCard(Suit suit, Rank rank) 
-    {
-        this.suit = suit;
-        this.rank = rank;
-    }
-
-    public Suit getSuit() 
-    {
-        return suit;
-    }
-
-    public Rank getRank() 
-    {
-        return rank;
-    }
-
-    @Override
-    public int compareTo(PlayingCard other) 
-    {
-        int suitComparison = Integer.compare(this.suit.getOrder(), other.suit.getOrder());
-        if (suitComparison != 0) 
-            return suitComparison;
-        return Integer.compare(this.rank.getNumericRank(), other.rank.getNumericRank());
-    }
-
-    @Override
-    public boolean equals(Object obj) 
-    {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-        PlayingCard that = (PlayingCard) obj;
-        return suit == that.suit && rank == that.rank;
-    }
-
-    @Override
-    public int hashCode() 
-    {
-        return Objects.hash(suit, rank);
-    }
-
-    @Override
-    public String toString() 
-    {
-        return rank + " of " + suit;
-    }
-}
 
 
 
